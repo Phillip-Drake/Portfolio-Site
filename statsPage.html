@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="statsPageStyle.css">
+        <title>Stats!!</title>
+    </head>
+    <body onload = "onLoad()">
+        <div class = sunParent>
+            <div id = "sunDiv"> 
+            </div>
+            <img src="sun.png" alt="sun">
+        </div>
+        <div class = moonParent>
+            <div id = "moonDiv">
+            </div>
+            <img src="moon.png" alt = "moon">
+        </div>
+        <div class = "navBar">
+            <div>
+                Fun Facts
+            </div>
+            <div onclick = "window.location.href='resumePage.html'">
+                Resume
+            </div>
+            <div>
+                Projects
+            </div>
+            <div onclick = "window.location.href='landingPage.html'">
+                Home
+            </div>
+        </div>
+    </body>
+
+</html>
+
+<script>
+    const date = new Date();
+    const firstDate = new Date("7/4/03")
+    function onLoad(){
+        let newDateYear = date.getFullYear() - firstDate.getFullYear();
+        let newDateMonth = date.getMonth() - firstDate.getMonth();
+        let newDate = date.getDay() - firstDate.getDay();
+        sunDiv = document.getElementById("sunDiv");
+        let totalDays = newDateYear*365 + newDateMonth*30 + newDate;
+        sunDiv.innerHTML = totalDays + " Days Lived.";
+        moonDiv = document.getElementById("moonDiv");
+        totalDays -= 30;
+        moonDiv.innerHTML = totalDays + " Nights Slept.";
+    }
+    window.onscroll = function() {myFunction()};
+    function myFunction() {
+        let rgbString = "rgb(236, 200, 175)";
+        let num1 = Number(rgbString.substring(4, 7));
+        let num2 = Number(rgbString.substring(9, 12));
+        let num3 = Number(rgbString.substring(14, 17));
+        let rgbString2 = "rgb(45, 50, 56)";  
+        let Inum1 = Number(rgbString2.substring(4, 6));
+        let Inum2 = Number(rgbString2.substring(8, 10));
+        let Inum3 = Number(rgbString2.substring(12, 14));
+        let num1Dif = num1 - Inum1;       
+        let num2Dif = num2 - Inum2;
+        let num3Dif = num3 - Inum3;
+        let num1IDif = Inum1 - num1;
+        let num2IDif = Inum2 - num2;
+        let num3IDif = Inum3 - num3;
+        let h = document.documentElement, b = document.body, st = 'scrollTop', sh = 'scrollHeight';
+        let percentage = (h[st]||b[st]) / ((h[sh]||b[sh]) - h.clientHeight);
+        let sunNum1 = Math.round(num1 - (num1Dif * percentage));
+        let sunNum2 = Math.round(num2 - (num2Dif * percentage));
+        let sunNum3 = Math.round(num3 - (num3Dif * percentage));
+        let finalSunColor = "#" + sunNum1.toString(16) + sunNum2.toString(16) + sunNum3.toString(16);    
+        document.body.style.backgroundColor = finalSunColor;
+        let moonNum1 = Math.round(Inum1 - (num1IDif * percentage));
+        let moonNum2 = Math.round(Inum2 - (num2IDif * percentage));
+        let moonNum3 = Math.round(Inum3 - (num3IDif * percentage));
+        let finalMoonColor = "#" + moonNum1.toString(16) + moonNum2.toString(16) + moonNum3.toString(16);      
+        document.getElementById("sunDiv").style.color = finalMoonColor
+        document.getElementById("moonDiv").style.color = finalMoonColor;
+    }
+</script>
