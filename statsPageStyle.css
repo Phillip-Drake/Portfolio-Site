@@ -8,8 +8,9 @@ body{
 }
 .sunParent{
     font-size: 400%;
-    margin-top: 20%;
-    margin-bottom: 25%;
+    padding-top: 20%;
+    padding-bottom: 25%;
+    
 }
 .sunParent > div{
     color: #2D3238;
@@ -26,8 +27,8 @@ body{
 }
 .moonParent{
     font-size: 400%;
-    margin-top: 80%;
-    margin-bottom: 25%;
+    padding-top: 20%;
+    padding-bottom: 25%;
 }
 .moonParent > div{
     color: #2D3238;
@@ -40,37 +41,7 @@ body{
     width : 20%;
     height : 20%;
     margin-top: -20%;
-    margin-right: 5%;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .navBar{
     display: flex;
     overflow:hidden;
@@ -81,8 +52,10 @@ body{
     background-color:#ECC8AF; 
     border-style: solid;
     border-color: #2D3238;
-    border-radius: 5px;
     text-align: center;
+    border-bottom-width: 0px;
+    border-left-width: 0px;
+    border-right-width: 0px;
 }
 .navBar > div{
     color: #2D3238;
@@ -101,3 +74,8 @@ body{
     border-top-width: 0px;
     border-bottom-width: 0px;
 }
+.navBar > div:hover{
+    cursor:pointer;
+    background-color: rgb(231, 173, 153);
+    transition: background-color .2s;
+}   

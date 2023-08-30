@@ -10,25 +10,53 @@ body{
     margin-bottom: 25%;
     text-align: center;
     font-size: 200%;
-    color: #2D3238;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-weight: bold;
-    
 }
 .content{
     overflow:hidden;
     margin-bottom: 100px;
 }
-.selfDescription{
+.text{
     color: #2D3238;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.selfDescription{
     float: right;
     width: 40%;
     background: #ECC8AF;
+}
+.contactCallout{
+    font-size: 12pt;
+    font-weight: bold;
+}
+.border{
+    background: #ECC8AF;
     padding: 1%;
-    border: 45, 50, 56;
+    border: rgb(45, 50, 56);
     border-radius: 5px;
     border-style: solid;
+}
+.bottomMargin100px{
+    margin-bottom: 100px;
+}
+.bottomMargin20px{
+    margin-bottom: 20px;
+}
+.middleAlignText{
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+.socialMediaIcons{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+.iconSize{
+    max-width: 80px; 
+    max-height: 80px;
 }
 .selfPic{
     float:left;
@@ -41,6 +69,7 @@ body{
     border-radius: 5px;
     border-style: solid;
 }
+
 .navBar{
     display: flex;
     overflow:hidden;
@@ -51,12 +80,12 @@ body{
     background-color:#ECC8AF; 
     border-style: solid;
     border-color: #2D3238;
-    border-radius: 5px;
     text-align: center;
+    border-bottom-width: 0px;
+    border-left-width: 0px;
+    border-right-width: 0px;
 }
 .navBar > div{
-    color: #2D3238;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-weight: bold;
     font-size: 15px;
     width: 10%;
@@ -67,9 +96,13 @@ body{
     padding-bottom: 1%;
     border-style: solid;
     border-color: #2D3238;
-    text-align: center;
     border-top-width: 0px;
-    border-bottom-width: 0px;
+    border-bottom-width: 0px;   
+}
+.navBar > div:hover{
+    cursor:pointer;
+    background-color: rgb(231, 173, 153);
+    transition: background-color .2s;
 }
 
 

@@ -5,8 +5,6 @@
 body{
     background-color:rgb(236, 200, 175);
 }
-p{
-}
 .title{
     font-size: 200%;
     color: #2D3238;
@@ -18,6 +16,7 @@ p{
     width: 820px;
     margin-left: auto ;
     margin-right: auto ;
+    margin-bottom: 3%;
 }
 
 .navBar{
@@ -30,8 +29,10 @@ p{
     background-color:#ECC8AF; 
     border-style: solid;
     border-color: #2D3238;
-    border-radius: 5px;
     text-align: center;
+    border-bottom-width: 0px;
+    border-left-width: 0px;
+    border-right-width: 0px;
 }
 .navBar > div{
     color: #2D3238;
@@ -49,4 +50,9 @@ p{
     text-align: center;
     border-top-width: 0px;
     border-bottom-width: 0px;
+}
+.navBar > div:hover{
+    cursor:pointer;
+    background-color: rgb(231, 173, 153);
+    transition: background-color .2s;
 }

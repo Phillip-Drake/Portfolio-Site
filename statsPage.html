@@ -18,8 +18,8 @@
             <img src="moon.png" alt = "moon">
         </div>
         <div class = "navBar">
-            <div>
-                Fun Facts
+            <div onclick = "window.location.href='interpreterPage.html'">
+                BrainF*ck
             </div>
             <div onclick = "window.location.href='resumePage.html'">
                 Resume
@@ -27,7 +27,7 @@
             <div>
                 Projects
             </div>
-            <div onclick = "window.location.href='landingPage.html'">
+            <div onclick = "window.location.href='index.html'">
                 Home
             </div>
         </div>
@@ -38,6 +38,7 @@
 <script>
     const date = new Date();
     const firstDate = new Date("7/4/03")
+    //calculates dates for 
     function onLoad(){
         let newDateYear = date.getFullYear() - firstDate.getFullYear();
         let newDateMonth = date.getMonth() - firstDate.getMonth();
@@ -46,7 +47,7 @@
         let totalDays = newDateYear*365 + newDateMonth*30 + newDate;
         sunDiv.innerHTML = totalDays + " Days Lived.";
         moonDiv = document.getElementById("moonDiv");
-        totalDays -= 30;
+        totalDays -= 17;
         moonDiv.innerHTML = totalDays + " Nights Slept.";
     }
     window.onscroll = function() {myFunction()};
