@@ -1,24 +1,58 @@
-.header{
-	background-color:#626C7E;
-    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
 body{
     background-color:rgb(236, 200, 175);
+    scrollbar-width: 0px;
 }
 .title{
     font-size: 200%;
-    color: #2D3238;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.resumeText{
+    font-family: "Times New Roman", Times, serif;
+}
+.sectionHeader{
+    text-decoration: underline;
     font-weight: bold;
-
 }
-.resume{
-    width: 820px;
-    margin-left: auto ;
-    margin-right: auto ;
-    margin-bottom: 3%;
+.boldText{
+    font-weight: bold;
 }
-
+.italicizedText{
+    font-style: italic;
+}
+.leftAlign{
+    margin-left: 14%;
+}
+.rightAlign{
+    margin-right: 14%;
+}
+.middleAlign{
+    text-align: center;
+}
+.border{
+    height: 2.2px;
+    background-color: black;
+    margin-left: 14%;
+    margin-right: 14%;
+}
+.flexBox{
+    display: inline-flex;
+    justify-content: space-between;
+    margin-left: 14%;
+    width: 72%;
+}
+ul{
+    list-style: disc;
+    padding-left: 0%;
+}
+li{
+    margin-left: 16%;
+    width: 70%;
+}
+i{
+    font-weight: normal;
+}
+.bottomMargin100px{
+    margin-bottom: 100px;
+}
 .navBar{
     display: flex;
     overflow:hidden;
