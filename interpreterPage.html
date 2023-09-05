@@ -130,6 +130,7 @@
         //only executes if done
         //resets registry, reads code from textArea
         code = trimCode(document.querySelector(".codeDisplay").value);
+        let totalOps = 0;
         for(let i = charFrom; i < code.length; i++)
         {
             //performs necessary operations for each brainf*ck operation
@@ -163,6 +164,9 @@
             }
             updateRegistry();
             placePointer();
+            totalOps++;
+            if(totalOps > 100)
+                break;
         }
         if(outputString != "")
         {
