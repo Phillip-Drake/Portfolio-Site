@@ -56,7 +56,7 @@
         <div onclick = "window.location.href='resumePage.html'">
             Resume
         </div>
-        <div>
+        <div onclick = "window.location.href = 'projectPage.html'">
             Projects
         </div>
         <div onclick = "window.location.href='statsPage.html'">
@@ -172,7 +172,7 @@
         {
             alert(outputString);
         }
-    }
+    }   
     function onUpdate()
     {
         let tempCode = trimCode(document.querySelector(".codeDisplay").value);
@@ -188,7 +188,6 @@
             resetRegistry();
             executeCode(0);
         }
-
     }
     function resetRegistry()
     {
@@ -296,7 +295,6 @@
         }
         return i;
     }
-    
     //sleep function, function MUST be async in order to use this
     function sleep(ms) 
     {

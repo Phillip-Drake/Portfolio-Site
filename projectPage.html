@@ -1,0 +1,117 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="projectPageStyle.css">
+        <title>Projects</title>
+    </head>
+    <div class = "scrollableViewParent" id = "viewParent">
+        <div class = "scrollableView" id = "leftView">
+        </div>
+        <div class = "scrollableView middleView" id = "primaryView">
+        </div>
+        <div class = "scrollableView" id = "rightView">
+        </div>
+    </div>
+    
+    <div class = "arrowParent">
+        <div class = "arrow" onclick = "scrollViewLeft()">
+            ←
+        </div>
+        <div class = "arrow" onclick = "scrollViewRight()">
+            →
+        </div>
+    </div>
+    <div class = "navBar">
+        <div onclick = "window.location.href='index.html'">
+            Home
+        </div>
+        <div onclick = "window.location.href='resumePage.html'">
+            Resume
+        </div>
+        <div onclick = "window.location.href = 'index.html'">
+            Home
+        </div>
+        <div onclick = "window.location.href='statsPage.html'">
+            Stats
+        </div>
+    </div>
+</html>
+<script>
+    //This assigns three view elements, and a viewParent
+    //viewParent is a div which contains leftView, primaryView, and rightView 
+    //to switch which view is onscreen, I initiate a css transition which moves the parent Div to the left for the length of one view, 
+    //and then, once the scroll is complete, the css transition is deactivated, and the contents of the div which is on screen(right or left)
+    //are assigned to the parent div
+    const viewParent = document.getElementById("viewParent");
+    const primaryView = document.getElementById("primaryView");
+    const leftView = document.getElementById("leftView");
+    const rightView = document.getElementById("rightView")
+
+
+    //contains every possible project state
+    //TODO : update states to contain html code which provides a visual recap of each project
+    const viewStates = [];
+    viewStates.push("Photon", "MinesWiiper", "TrashBot", "Eshop");
+    let currState = 1;
+    leftView.innerText = viewStates[currState - 1];
+    primaryView.innerText = viewStates[currState];
+    rightView.innerText = viewStates[currState + 1];
+    let active = false;
+    async function scrollViewLeft()
+    {
+        if(!active)
+        {
+            active = true;
+            viewParent.classList.add('scrollViewLeft');
+            await sleep(1100); 
+            currState += 1;
+            refreshViews()
+            viewParent.classList.remove('scrollViewLeft')
+            active = false;
+        }
+    }
+    async function scrollViewRight()
+    {
+        if(!active)
+        {
+            active = true;
+            viewParent.classList.add('scrollViewRight');
+            await sleep(1010);
+            currState -= 1;
+            refreshViews();
+            viewParent.classList.remove('scrollViewRight');
+            console.log(viewStates[currState]);
+            active = false;
+        }
+    }
+    function sleep(ms) 
+    {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+    function refreshViews()
+    {
+        if(currState < 0)
+        {
+            currState = viewStates.length - 1;
+        }
+        if(currState + 1 < viewStates.length)
+        {
+            rightView.innerText = viewStates[currState + 1];
+        }
+        else
+        {
+            rightView.innerText = viewStates[0];
+        }
+        if(currState - 1 >= 0)
+        {
+            leftView.innerText = viewStates[currState - 1];
+        }
+        else
+        {
+            leftView.innerText = viewStates[viewStates.length - 1];
+        }
+        primaryView.innerText = viewStates[currState];
+    }
+</script>
