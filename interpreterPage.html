@@ -7,62 +7,71 @@
         <title>Phillip Drake</title>
     </head>
     <body>
-        <div class = "regDisplayParent">
-            <div class = "regDisplayChild"></div>
-            <div class = "regDisplayChild"></div>
-            <div class = "regDisplayChild"></div>
-            <div class = "regDisplayChild"></div>
-            <div class = "regDisplayChild"></div>
-            <div class = "regDisplayChild"></div>
-            <div class = "regDisplayChild"></div>
-            <div class = "regDisplayChild"></div>
-            <div class = "regDisplayChild"></div>
-            <div class = "regDisplayChild"></div>
-            <div class = "regDisplayChild"></div>
-            <div class = "regDisplayChild"></div>
-            <div class = "regDisplayChild"></div>
-            <div class = "regDisplayChild"></div>
-            <div class = "regDisplayChild"></div>
-            <div class = "regDisplayChild"></div>
-            <div class = "regDisplayChild"></div>
-            <div class = "regDisplayChild"></div>
-            <div class = "regDisplayChild"></div>
-            <div class = "regDisplayChild"></div>
+        <!--Registry!-->
+        <div class = "regDisplayParent preventSelect">
+            <var class = "regDisplayChild"></var>
+            <var class = "regDisplayChild"></var>
+            <var class = "regDisplayChild"></var>
+            <var class = "regDisplayChild"></var>
+            <var class = "regDisplayChild"></var>
+            <var class = "regDisplayChild"></var>
+            <var class = "regDisplayChild"></var>
+            <var class = "regDisplayChild"></var>
+            <var class = "regDisplayChild"></var>
+            <var class = "regDisplayChild"></var>
+            <var class = "regDisplayChild"></var>
+            <var class = "regDisplayChild"></var>
+            <var class = "regDisplayChild"></var>
+            <var class = "regDisplayChild"></var>
+            <var class = "regDisplayChild"></var>
+            <var class = "regDisplayChild"></var>
+            <var class = "regDisplayChild"></var>
+            <var class = "regDisplayChild"></var>
+            <var class = "regDisplayChild"></var>
+            <var class = "regDisplayChild"></var>
         </div>
-        <!--<label class = toggleSwitch>
-            <input type = "checkbox">
+        <!--Dynamic Switch-->
+        <label class = "center text">
+            Dynamic Mode
+        </label>
+        <label class = "toggleSwitch center preventSelect">
+            <input type = "checkbox" id = "dynamic">
             <span class = "slider"></span>
-        </label>-->
-        <div class = "button" onclick = "executeCode(0)">
-            Run
+        </label>
+        <!--Delay Slider-->
+        <label class = "center text">
+            Delay
+        </label>
+        <div class="slideContainer">
+            <input type="range" min="0" max="100" value="50" class = "delaySlider" id="delayMs">
         </div>
-        <div class = "flexContainer">
-            <label class = "fileInputWrapper">  
-                <div class = "fileInputText">
-                    Upload code
-                </div>
-                <input type = "file" id = "fileInput" class = "fileInput" accept = ".txt" required change = "changeFunc()"/> 
-            </label>
-            <div class = "button" onclick = "downloadCode()">
-                Download code
+        <!--Code Display and Play Button-->
+        <div class = "codeDisplayWrapper">
+            <div class = "button preventSelect" onclick = "executeCode(0)">
+                <div class = "playIcon"></div>
+            </div>
+            <textarea class = "codeDisplay" oninput="onUpdate()">
+Sample Hello World : 
+>++++++++[<+++++++++>-]<.>++++[<+++++++>-]<+.+++++++..+++.>>++++++[<+++++++>-]<+
++.------------.>++++++[<+++++++++>-]<+.<.+++.------.--------.>>>++++[<++++++++>-
+]<+.
+            </textarea>
+        </div>
+        <div class = "navBar">
+            <div onclick = "window.location.href='index.html'">
+                Home
+            </div>
+            <div onclick = "window.location.href='resumePage.html'">
+                Resume
+            </div>
+            <div onclick = "window.location.href = 'projectPage.html'">
+                Projects
+            </div>
+            <div onclick = "window.location.href='statsPage.html'">
+                Stats
             </div>
         </div>
-        <textarea class = "codeDisplay" oninput="onUpdate()"></textarea>
     </body>
-    <div class = "navBar">
-        <div onclick = "window.location.href='index.html'">
-            Home
-        </div>
-        <div onclick = "window.location.href='resumePage.html'">
-            Resume
-        </div>
-        <div onclick = "window.location.href = 'projectPage.html'">
-            Projects
-        </div>
-        <div onclick = "window.location.href='statsPage.html'">
-            Stats
-        </div>
-    </div>
 </html>
 
 
@@ -76,21 +85,20 @@
     //index which is being executed
     var index = 0;
     var lastIndex = 0;
+    //represents age of most recently executing code thread
+    var age = 0;
+    var dynamic = false;
+    var executing = false;
+    //represents if the code is currently awaiting the function to be finished before adding queued code
+    var queuedActions = 0;
     //is only true when code is done executing, prevents code from being executed multiple times with async function
     var doneExecuting = true;
     const registryNodes = document.querySelector(".regDisplayParent").children
     const pointer = document.createElement("img");
-    pointer.src = "pointer.png"
+    pointer.src = "/data/pointer.png"
     pointer.alt = "pointer"
     pointer.classList.add("pointer")
-    //reads text file
-    document.getElementById("fileInput").addEventListener("change", function() {
-        var fr = new FileReader();
-        fr.onload=function(){
-            document.querySelector(".codeDisplay").value = fr.result;
-        }
-        fr.readAsText(this.files[0]);
-    });
+    
     //trims the code of any value which is not a brainf*ck operation
     function trimCode(unTrimmed){
         let code = "";
@@ -125,14 +133,38 @@
         }
         return code;
     }
+    //returns promise after x milliseconds
+    function resolveAfterX(x) {
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                resolve(x); 
+            }, x);
+        });
+    }
     //executes code
     async function executeCode(charFrom){
+        
         //only executes if done
         //resets registry, reads code from textArea
         code = trimCode(document.querySelector(".codeDisplay").value);
-        let totalOps = 0;
+        //local age, used to determine whether the current thread has been deprecated
+        let thisAge = 0;
+        //sets global age to 0 to show that the most recent thread has an age of 0
+        age = 0;
+        if(charFrom == 0)
+        {
+            resetRegistry();
+        }
+        //assures that the previous thread is done executing
+        await resolveAfterX(document.querySelector("#delayMs").value);
         for(let i = charFrom; i < code.length; i++)
         {
+            //checks for thread deprecation at start of character read, if the thread is deprecated then it exits
+            thisAge++;
+            if(thisAge > age+1)
+                return 0;
+            executing = true;
+            age++;
             //performs necessary operations for each brainf*ck operation
             switch(code[i])
             {
@@ -164,41 +196,69 @@
             }
             updateRegistry();
             placePointer();
-            totalOps++;
-            if(totalOps > 100)
-                break;
+            await resolveAfterX(document.querySelector("#delayMs").value);
         }
+        //Displays output
         if(outputString != "")
         {
             alert(outputString);
         }
-    }   
-    function onUpdate()
+        executing = false;
+    }
+    //executes on change in codeDisplay
+    async function onUpdate()
     {
-        let tempCode = trimCode(document.querySelector(".codeDisplay").value);
-        console.log(code);
-        console.log(tempCode.slice(0, -1));
-        if(code === tempCode.slice(0, -1))
+        //leaves the function if dynamic mode is off
+        if(!document.querySelector("#dynamic").checked)
         {
-            console.log("called");
-            executeCode(tempCode.length - 1);
+            return 0;
         }
-        else
+        //tempcode is the code currently in the codeDisplay at function call
+        let tempCode = trimCode(document.querySelector(".codeDisplay").value);
+        //if the code differs by more than the last characters in queue, resetRegistry and execute from base
+        if(code != tempCode.slice(0, 0-queuedActions - 1))
         {
+            queuedActions = 0;
             resetRegistry();
             executeCode(0);
+            return 0;
         }
+        //if the code is not currently executing, directly execute the code from the last character
+        if(!executing)
+        {
+            executeCode(tempCode.length - 1);
+            return 0;
+        }
+        //if there are already actions queued, add one to the queue and return
+        if(queuedActions != 0)
+        {
+            queuedActions++;
+            return 0;
+        }
+        //this can only be accessed if the queue is empty, the code is running, and the code only differs by the last character
+        //adds one to the queue, waits until the code is done executing, and then execute from the first queued character
+        queuedActions++;
+        //this function WILL last forever if there is an infinite loop, 
+        while(executing)
+        {
+            await resolveAfterX(document.querySelector("#delayMs").value);
+        }
+        //this executeCode function only needs to come from the last character because of the asynchronous nature, 
+        //so the last character is actually the character at the start of the queue
+        executeCode(tempCode.length - 1);
+        queuedActions = 0;
     }
+    //resets registry values
     function resetRegistry()
     {
-        console.log("called2");
         index = 0;
         lastIndex = 0;
         registry = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         outputString = "";
-        placePointer(0);
+        placePointer();
         updateRegistry();
     }
+    //changes the text of each registry child to the corresponding registry value
     function updateRegistry()
     {
         for(let i = 0; i < registry.length; i++)
@@ -206,7 +266,8 @@
             registryNodes[i].innerText = registry[i];
         }
     }
-    function placePointer(lastIndex)
+    //places pointer html object under registry child at index
+    function placePointer()
     {
         registryNodes[index].appendChild(pointer);
     }
@@ -256,21 +317,23 @@
     function openLoop(i)
     {
         let numOpenBrackets = 0;
-        if(registry[index] == 0)
+        if(registry[index] != 0)
         {
-            for(let j = i + 1; j < code.length; j++)
+            return i;
+        }
+        for(let j = i + 1; j < code.length; j++)
+        {
+            if(code[j] == '[')
             {
-                if(code[j] == '[')
+                numOpenBrackets++;
+            }
+            if(code[j] == ']')
+            {
+                if(numOpenBrackets == 0)
                 {
-                    numOpenBrackets++;
+                    return j;
                 }
-                if(code[j] == ']')
-                {
-                    if(numOpenBrackets == 0)
-                        return j;
-                    else
-                        numOpenBrackets--;
-                }
+                numOpenBrackets--;
             }
         }
         return i;
@@ -288,18 +351,15 @@
             if(code[j] == '[')
             {
                 if(numClosedBrackets == 0)
+                {
                     return j-1;
-                else
-                    numClosedBrackets--;
+                }
+                numClosedBrackets--;
             }
         }
         return i;
     }
-    //sleep function, function MUST be async in order to use this
-    function sleep(ms) 
-    {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
+    //file download support, can be implemented by adding an element with onclick=downloadCode()
     function downloadCode(){
         const link = document.createElement("a");
         const content = document.querySelector(".codeDisplay").value;
@@ -309,7 +369,14 @@
         link.click();
         URL.revokeObjectURL(link.href);
     }
-
+    //file read support, can be implemented by adding element with id "fileInput"
+    document.getElementById("fileInput").addEventListener("change", function() {
+            var fr = new FileReader();
+            fr.onload=function(){
+                document.querySelector(".codeDisplay").value = fr.result;
+            }
+            fr.readAsText(this.files[0]);
+        });
 
     
 </script>

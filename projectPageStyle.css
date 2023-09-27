@@ -2,6 +2,8 @@ body{
     background-color:rgb(236, 200, 175);
     height: 100%;
     overflow: hidden;
+    color: #2D3238;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 .scrollableViewParent{
     display: inline-flex;
@@ -52,6 +54,32 @@ body{
     line-height: 40px;
     font-size: 40pt;
     font-weight: bolder;
+}
+.projectWrapper{
+    display: flex;
+    justify-content: space-between;
+    padding: 1em;
+    width: calc(100% - 2em);
+    height: calc(100% - 2em);
+}
+.projectPic{
+    max-width: 45%;
+    max-height: 100%;
+    float: right;
+    border-radius: 5px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: rgb(45, 50, 56);
+}
+.projectText{
+    max-width: 50%;
+    max-height: 100%;
+    background-color: rgb(236, 200, 175);
+    border-width: 2px;
+    border-style: solid;
+    border-color: rgb(45, 50, 56);
+    border-radius: 5px;
+    padding: 1em;
 }
 .navBar{
     display: flex;

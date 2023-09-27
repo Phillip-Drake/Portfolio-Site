@@ -10,6 +10,12 @@
         <div class = "scrollableView" id = "leftView">
         </div>
         <div class = "scrollableView middleView" id = "primaryView">
+            <div class = "projectWrapper">
+                <img src="/data/phillipPic.jpg" alt="Me!!" class = "projectPic">
+                <div class = "projectText">
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                </div>
+            </div>
         </div>
         <div class = "scrollableView" id = "rightView">
         </div>
@@ -24,8 +30,8 @@
         </div>
     </div>
     <div class = "navBar">
-        <div onclick = "window.location.href='index.html'">
-            Home
+        <div onclick = "window.location.href='interpreterPage.html'">
+            BrainF*ck
         </div>
         <div onclick = "window.location.href='resumePage.html'">
             Resume
@@ -56,7 +62,7 @@
     viewStates.push("Photon", "MinesWiiper", "TrashBot", "Eshop");
     let currState = 1;
     leftView.innerText = viewStates[currState - 1];
-    primaryView.innerText = viewStates[currState];
+   
     rightView.innerText = viewStates[currState + 1];
     let active = false;
     async function scrollViewLeft()
