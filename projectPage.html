@@ -10,12 +10,6 @@
         <div class = "scrollableView" id = "leftView">
         </div>
         <div class = "scrollableView middleView" id = "primaryView">
-            <div class = "projectWrapper">
-                <img src="/data/phillipPic.jpg" alt="Me!!" class = "projectPic">
-                <div class = "projectText">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                </div>
-            </div>
         </div>
         <div class = "scrollableView" id = "rightView">
         </div>
@@ -59,13 +53,18 @@
     //contains every possible project state
     //TODO : update states to contain html code which provides a visual recap of each project
     const viewStates = [];
-    viewStates.push("Photon", "MinesWiiper", "TrashBot", "Eshop");
+    viewStates.push(
+    "<div class = \"projectWrapper\"><img src=\"/data/photonScreenshot.png\" alt=\"In Game\" class = \"projectPic\"><div class = \"projectRightSide\"><label class = \"projectTitle\">Photon : The Ultimate Game on Planet Earth</label><div class = \"projectText\">Worked with a team to design and implement a clone of the laser tag arena software \"Photon\" through a seriesof Scrum Sprints. Acted as a training tool to practice utilization of formalized design architectures, and design methodology in CSCE 3513 - Software Engineering.<br><br>Technology Used : <br>Java<br>Supabase<br><br><a href = \"https://github.com/huener/SE-photon\">Github Page</a></div></div></div>"
+    , "<div class = \"projectWrapper\"><img src=\"/data/minesWiiperGame.png\" alt=\"In Game\" class = \"projectPic\"><div class = \"projectRightSide\"><label class = \"projectTitle\">MinesWiiper</label><div class = \"projectText\">Created a port of the windows game \"Minesweeper\" for the Nintendo Wii. Implemented featuresnever before created on a homebrew Minesweeper port, such as custom board sizes, accurate first-click protections, and zooming / panning capabilities. <br><br>Technology Used : <br>DevKitPPC <br>LibWiiSprite<br>C++<br><br><a href = \"https://github.com/Tacolover93/MinesWiiper\">Github Page</a><br><br><a href = \"https://wiibrew.org/wiki/MinesWiiper\">WiiBrew Page</a></div></div>"
+    , "<div class = \"projectWrapper\"><img src=\"/data/eshopApp.png\" alt=\"eShop App\" class = \"projectPic\"><div class = \"projectRightSide\"><label class = \"projectTitle\">eShop</label><div class = \"projectText\">For the JBHunt 2023 Spring Hackathon, me and my team created an app which allows the user to scan barcodes of items they see in the grocery store,and returns a letter score to describe the sustainability of the company which created the item. Sustainability scores are createdthrough a combination of AI prompts and a user database of scores. An accompanying website may be used to view the items which the user has previously scanned.<br><br>Technology Used : <br>Android Studio <br>HTML/CSS<br>Python REST API<br>ChatGPT API<br>Supabase - an Open Source Firebase Alternative<br><br>Won 3rd place out of 30 teams which participated<br><br><a href = \"https://github.com/huener/hackathon-spring23\"> Github Page </a></div></div></div>"
+    , "<div class = \"projectWrapper\"><img src=\"/data/trashbotApp.png\" alt=\"Me!!\" class = \"projectPic\"><img src=\"/data/trashbotBot.jpg\" alt=\"Me!!\" class = \"projectPic\"><div class = \"projectRightSide\"><label class = \"projectTitle\">TrashBot</label><div class = \"projectText\">For the JBHunt 2022 Fall Hackathon, me and my team created a device which is able to detect when a trashcan is filled, and alert the user in a way which would force them to take the trash out due to sheer annoyance.<br><br>Technology Used : <br>Android Studio <br>HTML/CSS<br>Python REST API<br>Raspberry Pi<br>Arduino<br><br>Won 4th place out of 24 teams which participated<br><br><a href = \"https://github.com/joseph-bergin/Hackathon-2022\">Github Page</a></div></div></div>"
+    );
     let currState = 1;
-    leftView.innerText = viewStates[currState - 1];
-   
-    rightView.innerText = viewStates[currState + 1];
+    leftView.innerHTML = viewStates[currState - 1];
+    primaryView.innerHTML = viewStates[currState];
+    rightView.innerHTML = viewStates[currState + 1];
     let active = false;
-    async function scrollViewLeft()
+    async function scrollViewRight()
     {
         if(!active)
         {
@@ -73,12 +72,14 @@
             viewParent.classList.add('scrollViewLeft');
             await sleep(1100); 
             currState += 1;
+            if(currState > viewStates.length - 1)
+                currState = 0;
             refreshViews()
             viewParent.classList.remove('scrollViewLeft')
             active = false;
         }
     }
-    async function scrollViewRight()
+    async function scrollViewLeft()
     {
         if(!active)
         {
@@ -86,6 +87,8 @@
             viewParent.classList.add('scrollViewRight');
             await sleep(1010);
             currState -= 1;
+            if(currState < 0)
+                currState = viewStates.length - 1;
             refreshViews();
             viewParent.classList.remove('scrollViewRight');
             console.log(viewStates[currState]);
@@ -104,20 +107,20 @@
         }
         if(currState + 1 < viewStates.length)
         {
-            rightView.innerText = viewStates[currState + 1];
+            rightView.innerHTML = viewStates[currState + 1];
         }
         else
         {
-            rightView.innerText = viewStates[0];
+            rightView.innerHTML = viewStates[0];
         }
         if(currState - 1 >= 0)
         {
-            leftView.innerText = viewStates[currState - 1];
+            leftView.innerHTML = viewStates[currState - 1];
         }
         else
         {
-            leftView.innerText = viewStates[viewStates.length - 1];
+            leftView.innerHTML = viewStates[viewStates.length - 1];
         }
-        primaryView.innerText = viewStates[currState];
+        primaryView.innerHTML = viewStates[currState];
     }
 </script>

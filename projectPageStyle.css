@@ -62,8 +62,19 @@ body{
     width: calc(100% - 2em);
     height: calc(100% - 2em);
 }
+.projectRightSide{
+    display: flex;
+    flex-direction: column;
+    float: right;
+    justify-content: right;
+    max-width: 40%;
+}
+.projectTitle{
+    font-size: 200%;
+    text-align: center;
+}
 .projectPic{
-    max-width: 45%;
+    max-width: 90%;
     max-height: 100%;
     float: right;
     border-radius: 5px;
@@ -72,7 +83,6 @@ body{
     border-color: rgb(45, 50, 56);
 }
 .projectText{
-    max-width: 50%;
     max-height: 100%;
     background-color: rgb(236, 200, 175);
     border-width: 2px;
@@ -80,6 +90,8 @@ body{
     border-color: rgb(45, 50, 56);
     border-radius: 5px;
     padding: 1em;
+    margin-left: auto;
+    order: 2; 
 }
 .navBar{
     display: flex;
