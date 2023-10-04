@@ -8,9 +8,18 @@ body{
 }
 .sunParent{
     font-size: 400%;
-    padding-top: 20%;
-    padding-bottom: 25%;
-    
+}
+.spacing-20-percent{
+    height: 20vh;
+}
+.spacing-25-percent{
+    height: 25vh;
+}
+.spacing-50-percent{
+    height: 50vh;
+}
+.spacing-100-percent{
+    height: 100vh;
 }
 .sunParent > div{
     color: #2D3238;

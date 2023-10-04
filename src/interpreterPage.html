@@ -3,73 +3,76 @@
 	<head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="interpreterPageStyle.css">
+        <link rel="stylesheet" href="styles.css">
         <title>Phillip Drake</title>
     </head>
     <body>
         <!--Registry!-->
-        <div class = "regDisplayParent preventSelect">
-            <var class = "regDisplayChild"></var>
-            <var class = "regDisplayChild"></var>
-            <var class = "regDisplayChild"></var>
-            <var class = "regDisplayChild"></var>
-            <var class = "regDisplayChild"></var>
-            <var class = "regDisplayChild"></var>
-            <var class = "regDisplayChild"></var>
-            <var class = "regDisplayChild"></var>
-            <var class = "regDisplayChild"></var>
-            <var class = "regDisplayChild"></var>
-            <var class = "regDisplayChild"></var>
-            <var class = "regDisplayChild"></var>
-            <var class = "regDisplayChild"></var>
-            <var class = "regDisplayChild"></var>
-            <var class = "regDisplayChild"></var>
-            <var class = "regDisplayChild"></var>
-            <var class = "regDisplayChild"></var>
-            <var class = "regDisplayChild"></var>
-            <var class = "regDisplayChild"></var>
-            <var class = "regDisplayChild"></var>
+        <div class = "interpreter--registry-parent border-standard prevent-selection">
+            <var class = "interpreter--registry-child"></var>
+            <var class = "interpreter--registry-child"></var>
+            <var class = "interpreter--registry-child"></var>
+            <var class = "interpreter--registry-child"></var>
+            <var class = "interpreter--registry-child"></var>
+            <var class = "interpreter--registry-child"></var>
+            <var class = "interpreter--registry-child"></var>
+            <var class = "interpreter--registry-child"></var>
+            <var class = "interpreter--registry-child"></var>
+            <var class = "interpreter--registry-child"></var>
+            <var class = "interpreter--registry-child"></var>
+            <var class = "interpreter--registry-child"></var>
+            <var class = "interpreter--registry-child"></var>
+            <var class = "interpreter--registry-child"></var>
+            <var class = "interpreter--registry-child"></var>
+            <var class = "interpreter--registry-child"></var>
+            <var class = "interpreter--registry-child"></var>
+            <var class = "interpreter--registry-child"></var>
+            <var class = "interpreter--registry-child"></var>
+            <var class = "interpreter--registry-child"></var>
         </div>
+        <div class = "spacing-50px"></div>
         <!--Dynamic Switch-->
-        <label class = "center text">
+        <label class = "header-2-center">
             Dynamic Mode
         </label>
-        <label class = "toggleSwitch center preventSelect">
-            <input type = "checkbox" id = "dynamic">
-            <span class = "slider"></span>
+        <label class = "switch-toggle center prevent-selection">
+            <input type = "checkbox" id = "dynamicSwitch">
+            <i class = "switch-toggle-slider"></i>
         </label>
+        <div class = "spacing-10px"></div>
         <!--Delay Slider-->
-        <label class = "center text">
+        <label class = "header-2-center">
             Delay
         </label>
-        <div class="slideContainer">
-            <input type="range" min="0" max="100" value="50" class = "delaySlider" id="delayMs">
+        <div class="slider">
+            <input type="range" min="0" max="100" value="50" id="delayMs">
         </div>
+        <div class = "spacing-10px"></div>
         <!--Code Display and Play Button-->
-        <div class = "codeDisplayWrapper">
-            <div class = "button preventSelect" onclick = "executeCode(0)">
-                <div class = "playIcon"></div>
+        <div class = "interpreter--input-wrapper">
+            <div class = "button-1-5-em border-standard prevent-selection" onclick = "executeCode(0)">
+                <div class = "interpreter--play-icon"></div>
             </div>
-            <textarea class = "codeDisplay" oninput="onUpdate()">
+            <textarea class = "interpreter--input border-standard" oninput="onUpdate()" id = "codeInput">
 Sample Hello World : 
 >++++++++[<+++++++++>-]<.>++++[<+++++++>-]<+.+++++++..+++.>>++++++[<+++++++>-]<+
 +.------------.>++++++[<+++++++++>-]<+.<.+++.------.--------.>>>++++[<++++++++>-
 ]<+.
             </textarea>
         </div>
-        <div class = "navBar">
-            <div onclick = "window.location.href='index.html'">
+        <div class = "nav-bar">
+            <a href='index.html'>
                 Home
-            </div>
-            <div onclick = "window.location.href='resumePage.html'">
+            </a>
+            <a href='resumePage.html'>
                 Resume
-            </div>
-            <div onclick = "window.location.href = 'projectPage.html'">
+            </a>
+            <a href = 'projectPage.html'>
                 Projects
-            </div>
-            <div onclick = "window.location.href='statsPage.html'">
+            </a>
+            <a href='statsPage.html'>
                 Stats
-            </div>
+            </a>
         </div>
     </body>
 </html>
@@ -93,11 +96,11 @@ Sample Hello World :
     var queuedActions = 0;
     //is only true when code is done executing, prevents code from being executed multiple times with async function
     var doneExecuting = true;
-    const registryNodes = document.querySelector(".regDisplayParent").children
+    const registryNodes = document.querySelector(".interpreter--registry-parent").children
     const pointer = document.createElement("img");
-    pointer.src = "data/pointer.png"
+    pointer.src = "/data/pointer.png"
     pointer.alt = "pointer"
-    pointer.classList.add("pointer")
+    pointer.classList.add("interpreter--pointer")
     
     //trims the code of any value which is not a brainf*ck operation
     function trimCode(unTrimmed){
@@ -146,7 +149,7 @@ Sample Hello World :
         
         //only executes if done
         //resets registry, reads code from textArea
-        code = trimCode(document.querySelector(".codeDisplay").value);
+        code = trimCode(document.querySelector("#codeInput").value);
         //local age, used to determine whether the current thread has been deprecated
         let thisAge = 0;
         //sets global age to 0 to show that the most recent thread has an age of 0
@@ -209,12 +212,12 @@ Sample Hello World :
     async function onUpdate()
     {
         //leaves the function if dynamic mode is off
-        if(!document.querySelector("#dynamic").checked)
+        if(!document.querySelector("#dynamicSwitch").checked)
         {
             return 0;
         }
         //tempcode is the code currently in the codeDisplay at function call
-        let tempCode = trimCode(document.querySelector(".codeDisplay").value);
+        let tempCode = trimCode(document.querySelector("#codeInput").value);
         //if the code differs by more than the last characters in queue, resetRegistry and execute from base
         if(code != tempCode.slice(0, 0-queuedActions - 1))
         {
@@ -277,7 +280,7 @@ Sample Hello World :
         lastIndex = index;
         index--;
         if(index < 0)
-            index = 0;
+            index = 19;
     }
     //moves index right, with wrapping
     function shiftRight()
@@ -362,7 +365,7 @@ Sample Hello World :
     //file download support, can be implemented by adding an element with onclick=downloadCode()
     function downloadCode(){
         const link = document.createElement("a");
-        const content = document.querySelector(".codeDisplay").value;
+        const content = document.querySelector("#codeInput").value;
         const file = new Blob([content], { type: 'text/plain' });
         link.href = URL.createObjectURL(file);
         link.download = "code.txt";
@@ -370,10 +373,10 @@ Sample Hello World :
         URL.revokeObjectURL(link.href);
     }
     //file read support, can be implemented by adding element with id "fileInput"
-    document.getElementById("fileInput").addEventListener("change", function() {
+    document.querySelector("#fileInput").addEventListener("change", function() {
             var fr = new FileReader();
             fr.onload=function(){
-                document.querySelector(".codeDisplay").value = fr.result;
+                document.querySelector("#codeInput").value = fr.result;
             }
             fr.readAsText(this.files[0]);
         });
