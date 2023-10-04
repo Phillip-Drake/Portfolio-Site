@@ -37,13 +37,11 @@ var{
 /*landing page styling!!*/
 
 .index--intro-page{
-    margin-top: 20%;
-    margin-bottom: 25%;
     text-align: center;
 }
 
 .index--image-left{
-    max-width: 40%;
+    max-width: 30em;
     margin-right: 10px;
 }
 
@@ -75,6 +73,38 @@ var{
     transition: background-color .2s;
 }
 
+@media (width >= 895px){
+    .flex-column-right{
+        float: right;
+        width: 40%;
+    }
+}
+@media (width < 895px){
+    .index--content{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .index--contact-box{
+        width: 80%;
+    }
+    .flex-column-right{
+        float: none;
+        width: 100%;
+    }
+    .index--image-left{
+        display: block;
+        max-width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 20px;
+    }
+    .index--description{
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 20px;
+    }
+}
 /*resume page styling!*/
 
 .resume--title{
@@ -274,14 +304,12 @@ var{
     border-radius: 10px;
     border-style: solid;
 }
-
 .flex-column-right{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    float: right;
-    width: 40%;
 }
+
 
 .flex-icon-wrapper-center{
     display: flex;
