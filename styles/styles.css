@@ -4,6 +4,7 @@ body{
     font-family: Verdana, Geneva, Tahoma, sans-serif;  
     scrollbar-width: none;
     min-height: 100%;
+    overflow-x: hidden;
 }
 
 /*span elements apply to any icon*/
@@ -16,6 +17,8 @@ span{
 span:hover{
     color: rgb(255, 255, 255);
     transition: color .2s;
+}
+img{
 }
 /*removes decoration from hyperlinks*/
 a{
@@ -43,6 +46,7 @@ var{
 .index--image-left{
     max-width: 30em;
     margin-right: 10px;
+    order: 1;
 }
 
 .index--social-icons{
@@ -91,6 +95,7 @@ var{
     .flex-column-right{
         float: none;
         width: 100%;
+        order: 2;
     }
     .index--image-left{
         display: block;
@@ -105,62 +110,9 @@ var{
         margin-bottom: 20px;
     }
 }
-/*resume page styling!*/
-
-.resume--title{
-    font-size: 200%;
-}
-
-.resume--text{
-    font-family: "Times New Roman", Times, serif;
-}
-
-.resume--middle-align{
-    text-align: center;
-}
-
-.resume--sectionDivider{
-    height: 2.2px;
-    background-color: black;
-    margin-left: 14%;
-    margin-right: 14%;
-}
-
-.resume--section-header{
-    text-decoration: underline;
-    font-weight: bold;
-}
-
-.resume--left-align{
-    margin-left: 14%;
-}
-
-.resume--flex{
-    display: inline-flex;
-    justify-content: space-between;
-    margin-left: 14%;
-    width: 72%; 
-}
-
-.resume--bold{
-    font-weight: bold;
-}
-
-.resume--italic{
-    font-style: italic;
-}
-
-.resume--list{
-    list-style: disc;
-    padding-left: 0%;
-}
-
-.resume--list-indice{
-    margin-left: 16%;
-    width: 70%;
-}
 
 /*interpreter page styling!*/
+
 .interpreter--registry-parent{
     display: flex;
     margin-left: auto;
@@ -229,7 +181,6 @@ var{
 .projects--carousel-parent > div{
     background-color: rgb(231, 173, 153);
     width: 80%;
-    height: 500px;
 }
 .projects--carousel-parent > div:nth-child(2){
     margin-right: 10%;
@@ -249,25 +200,14 @@ var{
     width: 80%;
     margin-left: 10%;
 }
-.projects--project-image{
-    max-width: 90%;
-    max-height: 100%;
-    float: right;
-}
+
 .projects--project-wrapper{
     display: flex;
     justify-content: space-between;
     padding: 1em;
     width: calc(100% - 2em);
-    height: calc(100% - 2em);
 }
-.projects--project-wrapper-right{
-    display: flex;
-    flex-direction: column;
-    justify-content: right;
-    float: right;
-    max-width: 40%;
-}
+
 .projects--project-text{
     max-height: 100%;
     padding: 1em;
@@ -275,10 +215,69 @@ var{
     order: 2;
     background-color: rgb(236, 200, 175);
 }
+.projects--image-wrapper{
+    width: auto;
+    height: auto;
+}
+.projects--project-image{
+    height: 100%;
+    width: 100%;
+    margin-bottom: 0px;
+}
+.projects--project-image-flex-wrapper{
+    display:flex;
+    flex-wrap: wrap;
+}
+.projects--project-textWrapper{
+    width: 100%;
+    height: 100%;
+}
+@media (width > 1175px){
+    .projects--carousel-parent > div{
+        height: 500px;
+    }
+    .projects--project-wrapper{
+        height: calc(100% - 2em);
+    }
+    .projects--project-wrapper-right{
+        display: flex;
+        flex-direction: column;
+        justify-content: right;
+        float: right;
+        max-width: 40%;
+    }
+    .projects--project-image-flex-wrapper{
+        width: 75%;
+        justify-content: space-around;
+        flex-wrap: nowrap;
+        align-items: center;
+    }
+
+}
+@media (width <= 1175px){
+    .projects--project-wrapper{
+        flex-direction: column;
+    }
+    .projects--project-image-wrapper{
+        order: 3;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .projects--project-wrapper-right{
+        margin-bottom: 5px;
+    }
+    .flex-horizontal{
+        order: 3;
+    }
+    .projects--project-image-flex-wrapper{
+        width: 100%;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        order: 3;
+    }
+}
 
 /*stats page styles!!*/
-.stats--section{
-}
 .stats--sun-image{
     float: right;
     max-width: 1500px;
@@ -309,7 +308,12 @@ var{
     flex-direction: column;
     justify-content: center;
 }
-
+.flex-horizontal{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 70%;
+}
 
 .flex-icon-wrapper-center{
     display: flex;
@@ -504,6 +508,9 @@ input[type=range]::-moz-range-thumb {
 }
 .spacing-100-percent{
     height: 100vh;
+}
+.test{
+    margin-left: -50px;
 }
 /*prevents mouse from being able to select text within element*/
 .prevent-selection{

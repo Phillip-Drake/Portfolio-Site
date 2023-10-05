@@ -29,14 +29,14 @@
         <a href='interpreterPage.html'>
             BrainF*ck
         </a>
-        <a href='resumePage.html'>
-            Resume
-        </a>
         <a href = '../index.html'>
             Home
         </a>
         <a href='statsPage.html'>
             Stats
+        </a>
+        <a href='../data/Resume.pdf'>
+            Resume
         </a>
     </div>
 </html>
@@ -57,7 +57,11 @@
     const viewStates = [];
     viewStates.push(
     `<div class = "projects--project-wrapper">
-        <img src="../data/photonScreenshot.png" alt="In Game" class = "projects--project-image border-standard">
+        <div class = "projects--project-image-flex-wrapper">
+            <div class = "projects--project-image-wrapper">
+                <img src="../data/photonScreenshot.png" alt="In Game" class = "projects--project-image border-standard">
+            </div>
+        </div>
         <div class = "projects--project-wrapper-right">
             <label class = "header-center">
                 Photon : The Ultimate Game on Planet Earth
@@ -71,14 +75,18 @@
                 <br>
                 Supabase
                 <br><br>
-                <a href = "https://github.com/huener/SE-photon">
+                <a href = "https://github.com/huener/SE-photon" target = "_blank">
                     Github Page
                 </a>
             </div>
         </div>
     </div>`,
     `<div class = "projects--project-wrapper">
-        <img src="../data/minesWiiperGame.PNG" alt="In Game" class = "projects--project-image border-standard">
+        <div class = "projects--project-image-flex-wrapper">
+            <div class = "projects--project-image-wrapper">
+                <img src="../data/minesWiiperGame.PNG" alt="In Game" class = "projects--project-image border-standard">
+            </div>
+        </div>
         <div class = "projects--project-wrapper-right">
             <label class = "header-center">
                 MinesWiiper
@@ -92,18 +100,22 @@
                 <br>
                 C++
                 <br><br>
-                <a href = "https://github.com/Tacolover93/MinesWiiper">
+                <a href = "https://github.com/Tacolover93/MinesWiiper" target = "_blank">
                     Github Page
                 </a>
                 <br><br>
-                <a href = "https://wiibrew.org/wiki/MinesWiiper">
+                <a href = "https://wiibrew.org/wiki/MinesWiiper" target = "_blank">
                     WiiBrew Page
                 </a>
             </div>
         </div>
     </div>`,
     `<div class = "projects--project-wrapper">
-        <img src="../data/eShopApp.png" alt="eShop App" class = "projects--project-image border-standard">
+        <div class = "projects--project-image-flex-wrapper">
+            <div class = "projects--project-image-wrapper">
+                <img src="../data/eShopApp.png" alt="eShop App" class = "projects--project-image border-standard">
+            </div>
+        </div>
         <div class = "projects--project-wrapper-right">
             <label class = "header-center">
                 eShop
@@ -132,13 +144,20 @@
         </div>
     </div>`,
     `<div class = "projects--project-wrapper">
-        <img src="../data/trashBotApp.png" alt="Me!!" class = "projects--project-image border-standard">
-        <img src="../data/trashbotBot.jpg" alt="Me!!" class = "projects--project-image border-standard">
+        <div class = "projects--project-image-flex-wrapper">
+            <div class = "projects--project-image-wrapper">
+                <img src="../data/trashBotApp.png" alt="Me!!" class = "projects--project-image border-standard">
+            </div>
+            <div class = "projects--project-image-wrapper">
+                <img src="../data/trashbotBot.jpg" alt="Me!!" class = "projects--project-image border-standard">
+            </div>
+        </div>
         <div class = "projects--project-wrapper-right">
             <label class = "header-center">
                 TrashBot
             </label>
             <div class = "projects--project-text border-standard">
+                <div class = "projects--project-textWrapper">
                 For the JBHunt 2022 Fall Hackathon, me and my team created a device which is able to detect when a trashcan is filled, and alert the user in a way which would force them to take the trash out due to sheer annoyance.
                 <br><br>
                 Technology Used : 
@@ -155,10 +174,11 @@
                 <br><br>
                 Won 4th place out of 24 teams which participated
                 <br><br>
-                <a href = "https://github.com/joseph-bergin/Hackathon-2022">
+                <a href = "https://github.com/joseph-bergin/Hackathon-2022" target = "_blank">
                     Github Page
                 </a>
             </div>
+             
         </div>
     </div>`);
     let currState = 1;
@@ -224,5 +244,34 @@
             leftView.innerHTML = viewStates[viewStates.length - 1];
         }
         primaryView.innerHTML = viewStates[currState];
+        resizeImages(window.matchMedia("(width > 1175px)"))
     }
+    const query = window.matchMedia("(width > 1175px)");
+    function resizeImages(query)
+    {
+        if(query.matches)
+        {
+            let images = document.querySelectorAll("img");
+            for(const image of images){
+                image.style.height = "auto";
+                image.style.width = "auto";
+                image.style.maxHeight = "480px";
+                image.style.maxWidth = "90%";
+            }
+            return 0;
+        }
+        console.log("not");
+        let images = document.querySelectorAll("img");
+        for(const image of images){
+            
+            image.style.height = "20em";
+            
+            image.style.width = (parseInt(image.style.height) * ((image.naturalWidth) / image.naturalHeight)).toString() + "em";
+            console.log(image.style.width);
+        }
+        //image.style.width = image.height * ((image.naturalWidth) / image.naturalHeight);
+    }
+    query.addListener(resizeImages);
+    resizeImages(query);
+    
 </script>
