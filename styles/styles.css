@@ -574,7 +574,9 @@ input[type=range]::-moz-range-thumb {
 .spacing-50px{
     height: 50px;
 }
-
+.spacing-70px{
+    height: 70px;
+}
 .spacing-100px{
     height: 100px;
 }

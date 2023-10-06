@@ -109,7 +109,7 @@
                 eShop
             </label>
             <div class = "projects--project-text border-standard">
-                For the JBHunt 2023 Spring Hackathon, me and my team created an app which allows the user to scan barcodes of items they see in the grocery store, and returns a letter score to describe the sustainability of the company which created the item. Sustainability scores are created through a combination of AI prompts and a user database of scores. An accompanying website may be used to view the items which the user has previously scanned.
+                For the JBHunt 2023 Spring Hackathon, me and my team created an app which allows the user to scan barcodes of items and returns a letter score to describe the sustainability of the company which created the item. Scores are created through a combination of AI prompts and a user database of scores. An accompanying website may be used to view the items which the user has previously scanned.
                 <br><br>
                 Technology Used : 
                 <br>
@@ -176,7 +176,9 @@
         <div class = "button-30-percent border-standard prevent-selection" onclick = "scrollViewRight()">
             →
         </div>
-    </div>`;
+    </div>
+    <div class = "spacing-70px"></div>
+    `;
     let currState = 1;
     leftView.innerHTML = viewStates[currState - 1] + buttonsHTML;
     primaryView.innerHTML = viewStates[currState] + buttonsHTML;
@@ -185,17 +187,26 @@
     
     const query = window.matchMedia("(width > 1175px)");
     query.addListener(portraitView);
-    portraitView(query);
+    window.addEventListener('resize', fixRatios);
+    window.addEventListener("load", (event) => {
+        portraitView(query);
+    });
     async function scrollViewRight()
     {
         if(!active)
         {
             let buttons = document.querySelector(".projects--button-parent");
             active = true;
-            viewParent.classList.add('scrollViewLeft');
             window.scrollTo({top: 0, behavior: 'smooth'});
+            if(window.pageYOffset > 0)
+            {
+                await sleep(500);
+            }
             fixRatios("#rightView");
+            viewParent.classList.add('scrollViewLeft');
+            document.body.style.overflow = "hidden";
             await sleep(1010);
+            document.body.style.overflow = "scroll";
             currState += 1;
             if(currState > viewStates.length - 1)
                 currState = 0;
@@ -210,15 +221,21 @@
         {
             let buttons = document.querySelector(".projects--button-parent");
             active = true;
-            viewParent.classList.add('scrollViewRight');
             window.scrollTo({top: 0, behavior: 'smooth'});
+            if(window.pageYOffset > 0)
+            {
+                await sleep(500);
+            }
             fixRatios("#leftView");
+            viewParent.classList.add('scrollViewRight');
+            document.body.style.overflow = "hidden";
             await sleep(1010);
+            document.body.style.overflow = "scroll";
             currState -= 1;
             if(currState < 0)
                 currState = viewStates.length - 1;
             refreshViews();
-            viewParent.classList.remove('scrollViewRight');
+            viewParent.classList.remove('scrollViewRight')
             active = false;
         }
     }
@@ -255,8 +272,6 @@
     {
         if(query.matches)
         {
-            let window = document.querySelector("#primaryView > .projects--project-wrapper");
-            window.style.height = "468px";
             let images = document.querySelectorAll("img");
             for(const image of images){
                 image.style.height = "auto";
@@ -264,7 +279,6 @@
                 image.style.maxHeight = "480px";
                 image.style.maxWidth = "90%";
             }
-            document.body.style.height = "500px";
         }
         else
         {
@@ -275,11 +289,9 @@
                 image.style.width = (parseInt(image.style.height) * ((image.naturalWidth) / image.naturalHeight)).toString() + "em";
                 image.style.maxWidth = "97.5%";
             }
-            document.body.style.height = "1350px";
-            fixRatios();
             
         }
-        
+        fixRatios("#primaryView");
         //image.style.width = image.height * ((image.naturalWidth) / image.naturalHeight);
     }
     
@@ -293,7 +305,6 @@
             {
                 image.style.height = (image.offsetWidth * ((image.naturalHeight) / image.naturalWidth)).toString() + "px";
             }
-            console.log(viewWindow);
             let projectWindow = document.querySelector(viewWindow + " > .projects--project-wrapper");
             let title = document.querySelector(viewWindow + " > .projects--project-wrapper > .projects--project-wrapper-right > .header-center");
             let text = document.querySelector(viewWindow + " > .projects--project-wrapper > .projects--project-wrapper-right > .projects--project-text");
@@ -314,9 +325,28 @@
             finalHeight = finalHeight + maxImageHeight;
             projectWindow.style.height = finalHeight.toString() + "px"; 
         }
+        else{
+            let images = document.querySelectorAll(viewWindow + "> .projects--project-wrapper > .projects--project-image-flex-wrapper > .projects--project-image-wrapper > img");
+            let projectWindow = document.querySelector(viewWindow + " > .projects--project-wrapper");
+            let title = document.querySelector(viewWindow + " > .projects--project-wrapper > .projects--project-wrapper-right > .header-center");
+            let text = document.querySelector(viewWindow + " > .projects--project-wrapper > .projects--project-wrapper-right > .projects--project-text");
+            let finalHeight = 0;
+            for(const image of images)
+            {
+                if(image.offsetHeight > finalHeight)
+                {
+                    finalHeight = image.offsetHeight;
+                }
+            }
+            if((title.offsetHeight + text.offsetHeight) > finalHeight)
+            {
+                finalHeight = title.offsetHeight + text.offsetHeight ;
+            }
+            console.log(text.offsetHeight);
+            projectWindow.style.height = "calc(" + finalHeight.toString() + "px + 2em)"; 
+        }
     }
-    window.addEventListener('resize', fixRatios);
-    fixRatios();
+    
     function getPosition(elem){
         var dims = {offsetLeft:0, offsetTop:0};
         do {
