@@ -288,14 +288,13 @@
         if(viewWindow == "[object Event]")
             viewWindow = "#primaryView"; 
         if(!query.matches){
-            let images = document.querySelectorAll("img");
+            let images = document.querySelectorAll(viewWindow + "> .projects--project-wrapper > .projects--project-image-flex-wrapper > .projects--project-image-wrapper > img");
             for(const image of images)
             {
                 image.style.height = (image.offsetWidth * ((image.naturalHeight) / image.naturalWidth)).toString() + "px";
             }
             console.log(viewWindow);
             let projectWindow = document.querySelector(viewWindow + " > .projects--project-wrapper");
-            images = document.querySelectorAll(viewWindow + " > .projects--project-wrapper > .projects--project-image-flex-wrapper > .projects--project-image-wrapper > img");
             let title = document.querySelector(viewWindow + " > .projects--project-wrapper > .projects--project-wrapper-right > .header-center");
             let text = document.querySelector(viewWindow + " > .projects--project-wrapper > .projects--project-wrapper-right > .projects--project-text");
             let finalHeight = title.offsetHeight;
