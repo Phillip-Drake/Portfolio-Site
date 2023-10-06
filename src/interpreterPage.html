@@ -60,6 +60,7 @@ Sample Hello World :
 ]<+.
             </textarea>
         </div>
+        <div class = "spacing-70px"></div>
         <div class = "nav-bar">
             <a href='../index.html'>
                 Home
@@ -80,6 +81,15 @@ Sample Hello World :
 
 
 <script>
+    //responsiveness stuff
+    window.addEventListener('resize', fixRatios);
+    function fixRatios(){
+        let codeDisplay = document.querySelector(".interpreter--input-wrapper > .interpreter-input");
+        codeDisplay.width = "80%";
+    }
+
+
+
     //code variable saves full codeText without formatting
     var code = "";
     //registry values
