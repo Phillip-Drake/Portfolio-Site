@@ -9,7 +9,6 @@ body{
 }
 html {
     scrollbar-width: none;
-    overflow-x: hidden
 }
 
 /*span elements apply to any icon*/
@@ -23,8 +22,7 @@ span:hover{
     color: rgb(255, 255, 255);
     transition: color .2s;
 }
-img{
-}
+
 /*removes decoration from hyperlinks*/
 a{
     text-decoration: none;    
@@ -86,22 +84,27 @@ var{
     .flex-column-right{
         float: right;
         width: 40%;
+        margin-right: 17px;
     }
 }
+
 @media (width < 895px){
     .index--content{
         display: flex;
         flex-direction: column;
         justify-content: center;
     }
+
     .index--contact-box{
         width: 80%;
     }
+
     .flex-column-right{
         float: none;
         width: 100%;
         order: 2;
     }
+
     .index--image-left{
         display: block;
         max-width: 80%;
@@ -109,11 +112,13 @@ var{
         margin-right: auto;
         margin-bottom: 20px;
     }
+
     .index--description{
         margin-left: auto;
         margin-right: auto;
         margin-bottom: 20px;
     }
+
 }
 
 /*interpreter page styling!*/
@@ -126,6 +131,7 @@ var{
     height: 1.5em;
     width: 80em;
 }
+
 .interpreter--registry-child{
     border-style: solid;
     border-color:rgb(45, 50, 56);
@@ -138,12 +144,15 @@ var{
     width: 4em;
     height: 1.5em;
 }
+
 .interpreter--registry-child:first-child{
     border-left: 0px;
 }
+
 .interpreter--registry-child:last-child{
     border-right: 0px;
 }
+
 .interpreter--pointer{
     display: flex;
     align-items: center;
@@ -152,11 +161,13 @@ var{
     margin-left: auto;
     margin-right: auto;
 }
+
 .interpreter--input-wrapper{
     margin-left: 10%;
     margin-right: 10%;
     margin-top: -1.5em;
 }
+
 .interpreter--input{
     display: block; 
     text-align: top;
@@ -168,6 +179,7 @@ var{
     height: 20em;
     font-size: 150%;  
 }
+
 .interpreter--play-icon{
     width: 1.5em;
 	height: 1.5em;
@@ -183,35 +195,43 @@ var{
     width: 300%;
     margin-left: -100%;
 }
+
 .projects--carousel-parent > div{
     width: 80%;
 }
+
 .projects--carousel-parent > div:nth-child(2){
     margin-right: 10%;
     margin-left: 10%;
 }
+
 .projects--carousel-parent.scrollViewLeft{
     transition: margin-left 1s;
     margin-left: -210%
 }
+
 .projects--carousel-parent.scrollViewRight{
     transition: margin-left 1s;
     margin-left: 10%
 }
+
 .projects--button-parent{
     display: inline-flex;
     justify-content: space-between;
     width: 80%;
     margin-left: 10%;
 }
+
 .projects--button-parent.scrollViewRight{
     transition: margin-left 1s;
     margin-left: -127.5%;
 }
+
 .projects--button-parent.scrollViewLeft{
     transition: margin-left 1s;
     margin-left: 147.5%;
 }
+
 .projects--project-wrapper{
     display: flex;
     justify-content: space-between;
@@ -227,30 +247,37 @@ var{
     order: 2;
     background-color: rgb(236, 200, 175);
 }
+
 .projects--image-wrapper{
     width: auto;
     height: auto;
 }
+
 .projects--project-image{
     height: 100%;
     width: 100%;
     margin-bottom: 0px;
 }
+
 .projects--project-image-flex-wrapper{
     display:flex;
     flex-wrap: wrap;
 }
+
 .projects--project-textWrapper{
     width: 100%;
     height: 100%;
 }
+
 @media (width > 1175px){
     .projects--carousel-parent > div{
         height: 500px;
     }
+
     .projects--project-wrapper{
         height: calc(100% - 2em);
     }
+
     .projects--project-wrapper-right{
         display: flex;
         flex-direction: column;
@@ -258,6 +285,7 @@ var{
         float: right;
         max-width: 50%;
     }
+
     .projects--project-image-flex-wrapper{
         width: 75%;
         justify-content: space-around;
@@ -269,17 +297,21 @@ var{
     .projects--project-wrapper{
         flex-direction: column;
     }
+
     .projects--project-image-wrapper{
         order: 3;
         margin-left: auto;
         margin-right: auto;
     }
+
     .projects--project-wrapper-right{
         margin-bottom: 5px;
     }
+
     .flex-horizontal{
         order: 3;
     }
+
     .projects--project-image-flex-wrapper{
         width: 100%;
         justify-content: space-around;
@@ -295,12 +327,14 @@ var{
     margin-top: -1300px;
     margin-right: -700px;
 }
+
 .stats--moon-image{
     float: right;
     max-width: 500px;
     margin-right: 20px;
     margin-top: -300px;
 }
+
 .stats--section-text{  
     width: 40%;
     font-size: 400%;
@@ -314,11 +348,13 @@ var{
     border-radius: 10px;
     border-style: solid;
 }
+
 .flex-column-right{
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
+
 .flex-horizontal{
     display: flex;
     flex-wrap: wrap;
@@ -340,6 +376,7 @@ var{
     float: right;
     margin-top: 1em;
 }
+
 .header-left{
     display: block;
     font-weight: bold;
@@ -347,6 +384,7 @@ var{
     text-align: center;
     float: left;
 }
+
 .header-right{
     display: block;
     font-weight: bold;
@@ -361,22 +399,26 @@ var{
     font-size: 200%;
     text-align: center;
 }
+
 .header-2-center{
     display: block;
     font-weight: bold;
     font-size: 150%;
     text-align: center;
 }
+
 .button-1-5-em{
     width: 1.5em;
     height: 1.5em;
     text-align: center;
 }
+
 .button-1-5-em:hover{
     cursor: pointer;
     background-color:rgb(231, 173, 153);
     transition: .2s;
 }
+
 .button-30-percent{
     width: 30%;
     height: 2em;
@@ -384,6 +426,11 @@ var{
     font-weight: bold;
     line-height: 1.7em;
     text-align: center;
+}
+.button-30-percent:hover{
+    cursor: pointer;
+    background-color: rgb(231, 173, 153);
+    transition: .2s;
 }
 .button-10x4-em{
     width: 10em;
@@ -399,6 +446,7 @@ var{
     background-color:rgb(231, 173, 153);
     transition: .2s;
 }
+
 .switch-toggle{
     position: relative;
     width: 4em;
@@ -408,11 +456,13 @@ var{
     border-radius: 35px;
     margin-top: .5em;
 }
+
 .switch-toggle input{
     opacity: 0;
     width: 0;
     height: 0;
 }
+
 .switch-toggle-slider{
     position: absolute;
     cursor: pointer;
@@ -425,6 +475,7 @@ var{
     -webkit-transition: .4s;
     transition: .4s;
 }
+
 .switch-toggle-slider:before{
     position: absolute;
     border-radius: 35px;
@@ -437,17 +488,21 @@ var{
     -webkit-transition: .4s;
     transition: .4s;
 }
+
 input:checked + .switch-toggle-slider{
     background-color: rgb(231, 173, 153);
 }
+
 input:checked + .switch-toggle-slider:before{
     -webkit-transform: translateX(1.6em);
     -ms-transform: translateX(1.6em);
     transform: translateX(1.6em);
 }
+
 input[type="checkbox"].toggle{
     opacity: 0;
 }
+
 .slider{
     display: flex;
     justify-content: center;
@@ -457,18 +512,21 @@ input[type="checkbox"].toggle{
     width: 60%;
     height: 1em;
 }
+
 input[type="range"] {
     -webkit-appearance: none;
     border-style: solid;
     border-radius: 5px;
     border-color: rgb(45, 50, 56);
     background-color: rgb(236, 200, 175);
-  } 
+} 
+
 input[type="range"]::ms-range-track{
     border-width: 3px;
     border-color: rgb(45, 50, 56);
     background-color:rgb(231, 173, 153)
 }
+
 /*everything but firefox support(not IE)*/
 input[type=range]::-webkit-slider-thumb {
     -webkit-appearance: none;
@@ -479,7 +537,8 @@ input[type=range]::-webkit-slider-thumb {
     border-radius: 3px;
     background: rgb(231, 173, 153);
     cursor: pointer;
-  }
+}
+
 /*firefox support*/
 input[type=range]::-moz-range-thumb {
     border: 3px solid rgb(45, 50, 56);
@@ -490,6 +549,7 @@ input[type=range]::-moz-range-thumb {
     background: rgb(231, 173, 153);
     cursor: pointer;
 }
+
 .center{
     display: flex;
     margin-left: auto;
@@ -498,43 +558,57 @@ input[type=range]::-moz-range-thumb {
     justify-content: center;
     text-align: center; 
 }
+
 .padding-10px{
     padding: 10px;
 }
+
 .spacing-10px{
     height: 10px;
 }
+
 .spacing-20px{
     height: 20px
 }
+
 .spacing-50px{
     height: 50px;
 }
+
 .spacing-100px{
     height: 100px;
 }
+
 .spacing-20-percent{
     height: 20vh;
 }
+
 .spacing-25-percent{
     height: 25vh;
 }
+
 .spacing-40-percent{
     height: 40vh;
 }
+
 .spacing-50-percent{
     height: 50vh;
 }
+
 .spacing-60-percent{
     height: 60vh;
 }
+
 .spacing-100-percent{
     height: 100vh;
 }
+
 .test{
     margin-left: -50px;
 }
+
 /*prevents mouse from being able to select text within element*/
+
 .prevent-selection{
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -557,6 +631,7 @@ input[type=range]::-moz-range-thumb {
     bottom: 0px;
     text-align: center;
 }
+
 .nav-bar > a{
     background-color:#ECC8AF; 
     font-weight: bold;
