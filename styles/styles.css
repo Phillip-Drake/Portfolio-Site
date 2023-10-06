@@ -7,8 +7,9 @@ body{
     width: 100vw;
     overflow-x: hidden;
 }
-html{
-    overflow-x: hidden;
+html {
+    scrollbar-width: none;
+    overflow-x: hidden
 }
 
 /*span elements apply to any icon*/
@@ -584,7 +585,4 @@ input[type=range]::-moz-range-thumb {
 
 body::-webkit-scrollbar{
     display: none;
-    }
-    html {
-    scrollbar-width: none;
     }
