@@ -7,22 +7,11 @@
         <title>Projects</title>
     </head>
     <div class = "projects--carousel-parent" id = "viewParent">
-        <div class = "border-standard" id = "leftView">
+        <div id = "leftView">
         </div>
-        <div class = "border-standard" id = "primaryView">
+        <div id = "primaryView">
         </div>
-        <div class = "border-standard" id = "rightView">
-        </div>
-    </div>
-    
-    <div class = "spacing-20px"></div>
-
-    <div class = "projects--button-parent">
-        <div class = "button-10x4-em border-standard prevent-selection" onclick = "scrollViewLeft()">
-            ←
-        </div>
-        <div class = "button-10x4-em border-standard prevent-selection" onclick = "scrollViewRight()">
-            →
+        <div id = "rightView">
         </div>
     </div>
     <div class = "nav-bar">
@@ -35,7 +24,7 @@
         <a href='statsPage.html'>
             Stats
         </a>
-        <a href='../data/Resume.pdf'>
+        <a href='../data/Resume.pdf' target = "_blank">
             Resume
         </a>
     </div>
@@ -50,13 +39,11 @@
     const primaryView = document.getElementById("primaryView");
     const leftView = document.getElementById("leftView");
     const rightView = document.getElementById("rightView")
-
-
     //contains every possible project state
     //TODO : update states to contain html code which provides a visual recap of each project
     const viewStates = [];
     viewStates.push(
-    `<div class = "projects--project-wrapper">
+    `<div class = "projects--project-wrapper border-standard">
         <div class = "projects--project-image-flex-wrapper">
             <div class = "projects--project-image-wrapper">
                 <img src="../data/photonScreenshot.PNG" alt="In Game" class = "projects--project-image border-standard">
@@ -81,7 +68,7 @@
             </div>
         </div>
     </div>`,
-    `<div class = "projects--project-wrapper">
+    `<div class = "projects--project-wrapper border-standard">
         <div class = "projects--project-image-flex-wrapper">
             <div class = "projects--project-image-wrapper">
                 <img src="../data/minesWiiperGame.PNG" alt="In Game" class = "projects--project-image border-standard">
@@ -109,8 +96,9 @@
                 </a>
             </div>
         </div>
-    </div>`,
-    `<div class = "projects--project-wrapper">
+    </div>
+    `,
+    `<div class = "projects--project-wrapper border-standard">
         <div class = "projects--project-image-flex-wrapper">
             <div class = "projects--project-image-wrapper">
                 <img src="../data/eShopApp.png" alt="eShop App" class = "projects--project-image border-standard">
@@ -143,7 +131,7 @@
             </div>
         </div>
     </div>`,
-    `<div class = "projects--project-wrapper">
+    `<div class = "projects--project-wrapper border-standard">
         <div class = "projects--project-image-flex-wrapper">
             <div class = "projects--project-image-wrapper">
                 <img src="../data/trashBotApp.png" alt="Me!!" class = "projects--project-image border-standard">
@@ -157,7 +145,6 @@
                 TrashBot
             </label>
             <div class = "projects--project-text border-standard">
-                <div class = "projects--project-textWrapper">
                 For the JBHunt 2022 Fall Hackathon, me and my team created a device which is able to detect when a trashcan is filled, and alert the user in a way which would force them to take the trash out due to sheer annoyance.
                 <br><br>
                 Technology Used : 
@@ -177,26 +164,42 @@
                 <a href = "https://github.com/joseph-bergin/Hackathon-2022" target = "_blank">
                     Github Page
                 </a>
-            </div>
-             
+            </div>   
         </div>
     </div>`);
+    let buttonsHTML = 
+    `<div class = "spacing-20px"></div>
+    <div class = "projects--button-parent">
+        <div class = "button-30-percent border-standard prevent-selection" onclick = "scrollViewLeft()">
+            ←
+        </div>
+        <div class = "button-30-percent border-standard prevent-selection" onclick = "scrollViewRight()">
+            →
+        </div>
+    </div>`;
     let currState = 1;
-    leftView.innerHTML = viewStates[currState - 1];
-    primaryView.innerHTML = viewStates[currState];
-    rightView.innerHTML = viewStates[currState + 1];
+    leftView.innerHTML = viewStates[currState - 1] + buttonsHTML;
+    primaryView.innerHTML = viewStates[currState] + buttonsHTML;
+    rightView.innerHTML = viewStates[currState + 1] + buttonsHTML;
     let active = false;
+    
+    const query = window.matchMedia("(width > 1175px)");
+    query.addListener(portraitView);
+    portraitView(query);
     async function scrollViewRight()
     {
         if(!active)
         {
+            let buttons = document.querySelector(".projects--button-parent");
             active = true;
             viewParent.classList.add('scrollViewLeft');
-            await sleep(1100); 
+            window.scrollTo({top: 0, behavior: 'smooth'});
+            fixRatios("#rightView");
+            await sleep(1010);
             currState += 1;
             if(currState > viewStates.length - 1)
                 currState = 0;
-            refreshViews()
+            refreshViews();
             viewParent.classList.remove('scrollViewLeft')
             active = false;
         }
@@ -205,15 +208,17 @@
     {
         if(!active)
         {
+            let buttons = document.querySelector(".projects--button-parent");
             active = true;
             viewParent.classList.add('scrollViewRight');
+            window.scrollTo({top: 0, behavior: 'smooth'});
+            fixRatios("#leftView");
             await sleep(1010);
             currState -= 1;
             if(currState < 0)
                 currState = viewStates.length - 1;
             refreshViews();
             viewParent.classList.remove('scrollViewRight');
-            console.log(viewStates[currState]);
             active = false;
         }
     }
@@ -225,32 +230,33 @@
     {
         if(currState < 0)
         {
-            currState = viewStates.length - 1;
+            currState = viewStates.length - 1 + buttonsHTML;
         }
         if(currState + 1 < viewStates.length)
         {
-            rightView.innerHTML = viewStates[currState + 1];
+            rightView.innerHTML = viewStates[currState + 1] + buttonsHTML;
         }
         else
         {
-            rightView.innerHTML = viewStates[0];
+            rightView.innerHTML = viewStates[0] + buttonsHTML;
         }
         if(currState - 1 >= 0)
         {
-            leftView.innerHTML = viewStates[currState - 1];
+            leftView.innerHTML = viewStates[currState - 1] + buttonsHTML;
         }
         else
         {
-            leftView.innerHTML = viewStates[viewStates.length - 1];
+            leftView.innerHTML = viewStates[viewStates.length - 1] + buttonsHTML;
         }
-        primaryView.innerHTML = viewStates[currState];
-        resizeImages(window.matchMedia("(width > 1175px)"))
+        primaryView.innerHTML = (viewStates[currState] + buttonsHTML);
+        portraitView(query);
     }
-    const query = window.matchMedia("(width > 1175px)");
-    function resizeImages(query)
+    function portraitView(query)
     {
         if(query.matches)
         {
+            let window = document.querySelector("#primaryView > .projects--project-wrapper");
+            window.style.height = "468px";
             let images = document.querySelectorAll("img");
             for(const image of images){
                 image.style.height = "auto";
@@ -258,20 +264,67 @@
                 image.style.maxHeight = "480px";
                 image.style.maxWidth = "90%";
             }
-            return 0;
+            document.body.style.height = "500px";
         }
-        console.log("not");
-        let images = document.querySelectorAll("img");
-        for(const image of images){
+        else
+        {
+            let images = document.querySelectorAll("img");
+            for(const image of images){
+                
+                image.style.height = "20em";
+                image.style.width = (parseInt(image.style.height) * ((image.naturalWidth) / image.naturalHeight)).toString() + "em";
+                image.style.maxWidth = "97.5%";
+            }
+            document.body.style.height = "1350px";
+            fixRatios();
             
-            image.style.height = "20em";
-            
-            image.style.width = (parseInt(image.style.height) * ((image.naturalWidth) / image.naturalHeight)).toString() + "em";
-            console.log(image.style.width);
         }
+        
         //image.style.width = image.height * ((image.naturalWidth) / image.naturalHeight);
     }
-    query.addListener(resizeImages);
-    resizeImages(query);
     
+    //fixes a LOT of weird styling problems whenever the page is resized
+    function fixRatios(viewWindow = "#primaryView"){
+        if(viewWindow == "[object Event]")
+            viewWindow = "#primaryView"; 
+        if(!query.matches){
+            let images = document.querySelectorAll("img");
+            for(const image of images)
+            {
+                image.style.height = (image.offsetWidth * ((image.naturalHeight) / image.naturalWidth)).toString() + "px";
+            }
+            console.log(viewWindow);
+            let projectWindow = document.querySelector(viewWindow + " > .projects--project-wrapper");
+            images = document.querySelectorAll(viewWindow + " > .projects--project-wrapper > .projects--project-image-flex-wrapper > .projects--project-image-wrapper > img");
+            let title = document.querySelector(viewWindow + " > .projects--project-wrapper > .projects--project-wrapper-right > .header-center");
+            let text = document.querySelector(viewWindow + " > .projects--project-wrapper > .projects--project-wrapper-right > .projects--project-text");
+            let finalHeight = title.offsetHeight;
+            finalHeight = finalHeight + text.offsetHeight;
+            let maxImageHeight = 0;
+            for(const image of images)
+            {
+                if(window.matchMedia("(width <= 656px)").matches)
+                {
+                    finalHeight = finalHeight + image.offsetHeight;
+                }
+                else
+                {
+                    maxImageHeight = image.offsetHeight;
+                }
+            }
+            finalHeight = finalHeight + maxImageHeight;
+            projectWindow.style.height = finalHeight.toString() + "px"; 
+        }
+    }
+    window.addEventListener('resize', fixRatios);
+    fixRatios();
+    function getPosition(elem){
+        var dims = {offsetLeft:0, offsetTop:0};
+        do {
+            dims.offsetLeft += elem.offsetLeft;
+            dims.offsetTop += elem.offsetTop;
+        } while (elem = elem.offsetParent);
+
+        return dims;
+    }
 </script>

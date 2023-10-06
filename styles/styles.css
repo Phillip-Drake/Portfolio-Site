@@ -3,7 +3,7 @@ body{
     color: #2D3238;
     font-family: Verdana, Geneva, Tahoma, sans-serif;  
     scrollbar-width: none;
-    min-height: 100%;
+    min-height: 100vh;
     overflow-x: hidden;
 }
 
@@ -179,7 +179,6 @@ var{
     margin-left: -100%;
 }
 .projects--carousel-parent > div{
-    background-color: rgb(231, 173, 153);
     width: 80%;
 }
 .projects--carousel-parent > div:nth-child(2){
@@ -200,12 +199,20 @@ var{
     width: 80%;
     margin-left: 10%;
 }
-
+.projects--button-parent.scrollViewRight{
+    transition: margin-left 1s;
+    margin-left: -127.5%;
+}
+.projects--button-parent.scrollViewLeft{
+    transition: margin-left 1s;
+    margin-left: 147.5%;
+}
 .projects--project-wrapper{
     display: flex;
     justify-content: space-between;
     padding: 1em;
     width: calc(100% - 2em);
+    background-color: rgb(231, 173, 153);
 }
 
 .projects--project-text{
@@ -244,7 +251,7 @@ var{
         flex-direction: column;
         justify-content: right;
         float: right;
-        max-width: 40%;
+        max-width: 50%;
     }
     .projects--project-image-flex-wrapper{
         width: 75%;
@@ -252,7 +259,6 @@ var{
         flex-wrap: nowrap;
         align-items: center;
     }
-
 }
 @media (width <= 1175px){
     .projects--project-wrapper{
@@ -365,6 +371,14 @@ var{
     cursor: pointer;
     background-color:rgb(231, 173, 153);
     transition: .2s;
+}
+.button-30-percent{
+    width: 30%;
+    height: 2em;
+    font-size: 300%;
+    font-weight: bold;
+    line-height: 1.7em;
+    text-align: center;
 }
 .button-10x4-em{
     width: 10em;
@@ -506,6 +520,9 @@ input[type=range]::-moz-range-thumb {
 .spacing-50-percent{
     height: 50vh;
 }
+.spacing-60-percent{
+    height: 60vh;
+}
 .spacing-100-percent{
     height: 100vh;
 }
@@ -530,10 +547,9 @@ input[type=range]::-moz-range-thumb {
     justify-content: space-around;
     overflow:hidden;
     position: fixed;
-    bottom: 0px;
     left: 0px;
     right: 0px;
-
+    bottom: 0px;
     text-align: center;
 }
 .nav-bar > a{
@@ -547,11 +563,11 @@ input[type=range]::-moz-range-thumb {
     border-color: #2D3238;  
     border-width: 4px;  
     border-bottom-width: 0px;
-    border-bottom-left-radius: 0px;
-    border-bottom-right-radius: 0px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    border-top-width: 4px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+
 }
 
 .nav-bar > a:hover{
