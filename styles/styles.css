@@ -4,12 +4,10 @@ body{
     font-family: Verdana, Geneva, Tahoma, sans-serif;  
     scrollbar-width: none;
     min-height: 100vh;
-    width: 100vw;
-    overflow-x: hidden;
+    overflow-x: clip;
 }
 html {
     scrollbar-width: none;
-    max-width: 100vw;
 }
 
 /*span elements apply to any icon*/
@@ -192,6 +190,7 @@ var{
 /*projects page styling!!*/
 
 .projects--carousel-parent{
+    overflow-x: clip;
     position: absolute;
     display: inline-flex;
     justify-content: space-between;
