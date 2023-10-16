@@ -190,8 +190,7 @@ var{
 /*projects page styling!!*/
 
 .projects--carousel-parent{
-    overflow-x: clip;
-    position: absolute;
+    position: fixed;
     display: inline-flex;
     justify-content: space-between;
     width: 300%;
