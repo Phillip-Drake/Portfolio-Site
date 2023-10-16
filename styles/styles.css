@@ -190,6 +190,9 @@ var{
 /*projects page styling!!*/
 
 .projects--carousel-parent{
+    position: fixed;
+    overflow-x: scroll;
+    height: 100vh;
     display: inline-flex;
     justify-content: space-between;
     width: 300%;
