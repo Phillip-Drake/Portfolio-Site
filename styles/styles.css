@@ -191,6 +191,7 @@ var{
 /*projects page styling!!*/
 
 .projects--carousel-parent{
+    position: absolute;
     display: inline-flex;
     justify-content: space-between;
     width: 300%;
@@ -234,6 +235,7 @@ var{
 }
 
 .projects--project-wrapper{
+    position: relative;
     display: flex;
     justify-content: space-between;
     padding: 1em;
