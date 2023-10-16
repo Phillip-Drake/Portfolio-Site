@@ -191,6 +191,10 @@ var{
 
 .projects--carousel-parent{
     position: fixed;
+    top: 0;
+    left: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
     overflow-x: scroll;
     height: 100vh;
     display: inline-flex;
