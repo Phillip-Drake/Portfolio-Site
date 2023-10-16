@@ -190,7 +190,7 @@ var{
 /*projects page styling!!*/
 
 .projects--carousel-parent{
-    position: fixed;
+    position: sticky;
     display: inline-flex;
     justify-content: space-between;
     width: 300%;
