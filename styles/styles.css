@@ -4,7 +4,7 @@ body{
     font-family: Verdana, Geneva, Tahoma, sans-serif;  
     scrollbar-width: none;
     min-height: 100vh;
-    overflow-x: clip;
+    overflow-x: hidden;
 }
 html {
     scrollbar-width: none;
@@ -196,6 +196,7 @@ var{
     padding-top: 10px;
     padding-bottom: 10px;
     overflow-x: scroll;
+    padding-right: 20px;
     height: 100vh;
     display: inline-flex;
     justify-content: space-between;
