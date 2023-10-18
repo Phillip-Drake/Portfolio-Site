@@ -5,9 +5,14 @@ body{
     scrollbar-width: none;
     min-height: 100vh;
     overflow-x: hidden;
+    -ms-overflow-style: none;
 }
 html {
+    -ms-overflow-style: none;
     scrollbar-width: none;
+}
+body::-webkit-scrollbar{
+    display:none;
 }
 
 /*span elements apply to any icon*/
@@ -196,6 +201,8 @@ var{
     padding-top: 10px;
     padding-bottom: 10px;
     overflow-x: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
     padding-right: 20px;
     height: 100vh;
     display: inline-flex;
@@ -203,7 +210,9 @@ var{
     width: 300%;
     margin-left: -100%;
 }
-
+.projects--carousel-parent::-webkit-scrollbar{
+    display: none;
+}
 .projects--carousel-parent > div{
     width: 80%;
 }
